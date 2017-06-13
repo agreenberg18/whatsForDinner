@@ -15,10 +15,13 @@ export class YelpSearchService {
     return this.http.get(url, { headers: this.getHeaders()}).map(
       res =>{
         const data = res.json();
-        console.log(data);
+        //console.log(data);
         var numOfRest = data.nearby_restaurants;
-        console.log(numOfRest.length)
-        return data;
+        numOfRest = numOfRest.length
+        var rand = Math.floor(Math.random() * (numOfRest-1))
+        var restArray = data.nearby_restaurants;
+        var pickedRest = restArray[rand];
+        return pickedRest;
       }
     )
   }

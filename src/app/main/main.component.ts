@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { LocationServiceService } from '../location-service.service';
 import { YelpSearchService } from '../yelp-search.service';
 
@@ -14,6 +14,8 @@ export class MainComponent implements OnInit {
   lat : string;
   long : string;
   location: string;
+  restName: string;
+  url: string;
   constructor(private locService : LocationServiceService, private yelpService : YelpSearchService) { }
 
   ngOnInit() {
@@ -34,11 +36,14 @@ export class MainComponent implements OnInit {
       this.yelpService.getRestaurant(this.location).subscribe(
         res =>{
           console.log(res);
+          this.restName = res.restaurant.name;
+          this.url = res.restaurant.url;
+          console.log(this.restName);
         }
 
       )
-
     }
+
 
     mySwitch(): boolean{
       if (this.latNum == null && this.longNum == null){
