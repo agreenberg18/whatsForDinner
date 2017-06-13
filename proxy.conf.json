@@ -1,0 +1,7 @@
+{
+    "/yelp/v3/businesses":{
+        "target":"https://api.yelp.com/v3/businesses",
+        "secure":false,
+        "logLevel":"debug"
+    }
+}

@@ -1,6 +1,6 @@
-import { Http, Response, RequestOptions, Headers  } from '@angular/http';
+//import { Http, Response, RequestOptions, Headers  } from '@angular/http';
+import { Http, Response, Headers, JsonpModule } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/operator/add/map';
 
 
 import { Injectable } from '@angular/core';
@@ -8,15 +8,25 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class YelpSearchService {
 
-  // constructor(private http = Http) { }
-  //   getRests() : Observable<any>{
-  //     let rests$ = this.http.get('https://api.yelp.com/v3/businesses/search?categories=restaurants&latitude=37.786882&longitude=-122.399972',{headers: this.getHeaders()})
-  //     return rests$;
-  //   }
+  constructor(private http : Http) {}
 
-  //   private getHeaders(){
-  //   let headers = new Headers();
-  //   headers.append('Authorization', 'bearer RT2S0q88HosnKEJrds-Lbe5EhebLejgURB7JzQeK7lC_qNI_PCQL4XuR5yE7YfIcdX_GfDf9H7kwI44cyRf855v71v67Gpkue-ZjgoQTBJyDtL_7YJKxHPUsRkk4WXYx');
-  //   return headers;
-  // }
+  getRestaurant(loc) : Observable<any>{
+    const url = 'https://developers.zomato.com/api/v2.1/geocode?' + loc //lat=40.6786060&lon=-73.9739210
+    return this.http.get(url, { headers: this.getHeaders()}).map(
+      res =>{
+        const data = res.json();
+        console.log(data);
+        var numOfRest = data.nearby_restaurants;
+        console.log(numOfRest.length)
+        return data;
+      }
+    )
+  }
+
+    private getHeaders(){
+    // headers.append('Authorization', 'Bearer RT2S0q88HosnKEJrds-Lbe5EhebLejgURB7JzQeK7lC_qNI_PCQL4XuR5yE7YfIcdX_GfDf9H7kwI44cyRf855v71v67Gpkue-ZjgoQTBJyDtL_7YJKxHPUsRkk4WXYx');
+    // headers.append('Content-Type','application/x-www-form-urlencoded')
+    let headers = new Headers({ 'user-key': 'f858c8d33ad06ebe55ac37fd1943c993','Content-Type': 'application/json' });
+    return headers;
+  }
 }
