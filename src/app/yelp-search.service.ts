@@ -14,7 +14,7 @@ export class YelpSearchService {
     //Dev url
     //const url = 'https://yelpmiddleware-env.us-east-2.elasticbeanstalk.com/' + loc + '&radius=400&limit=50'
     //const url = 'https://api.yelp.com/v3/businesses/search?categories=restaurants&' + loc + '&radius=400&limit=50'
-    const url ='https://peaceful-hollows-97640.herokuapp.com/api';
+    const url ='https://peaceful-hollows-97640.herokuapp.com/' + loc + '&radius=400&limit=50';
     return this.http.get(url).map(  
       res =>{
         const data = res.json();
