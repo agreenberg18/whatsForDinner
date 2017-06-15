@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
   longNum : number;
   lat : string;
   long : string;
-  location: string;
+  loc: string;
   restName: string;
   url: string;
   constructor(private locService : LocationServiceService, private yelpService : YelpSearchService) { }
@@ -30,15 +30,14 @@ export class MainComponent implements OnInit {
     findRest(){
       this.lat = this.latNum.toString();
       this.long = this.longNum.toString();
-      this.location = 'lat' + '=' + this.lat + '&' + 'lon' + '=' + this.long;
-      console.log('next call');
+      this.loc = 'latitude' + '=' + this.lat + '&' + 'longitude' + '=' + this.long;
+      console.log(this.loc);
       
-      this.yelpService.getRestaurant(this.location).subscribe(
+      this.yelpService.getRestaurant(this.loc).subscribe(
         res =>{
           console.log(res);
-          this.restName = res.restaurant.name;
-          this.url = res.restaurant.url;
-          console.log(this.restName);
+          this.restName = res.name;
+          this.url = res.url;
         }
 
       )
