@@ -12,9 +12,9 @@ export class YelpSearchService {
 
   getRestaurant(loc) : Observable<any>{
     //Dev url
-    const url = 'http://localhost:3000/' + loc + '&radius=400&limit=50'
+    //const url = 'https://yelpmiddleware-env.us-east-2.elasticbeanstalk.com/' + loc + '&radius=400&limit=50'
     //const url = 'https://api.yelp.com/v3/businesses/search?categories=restaurants&' + loc + '&radius=400&limit=50'
-    //const url ='https://peaceful-hollows-97640.herokuapp.com/api';
+    const url ='https://peaceful-hollows-97640.herokuapp.com/api';
     return this.http.get(url).map(  
       res =>{
         const data = res.json();
@@ -31,5 +31,10 @@ export class YelpSearchService {
       }
     )
   }
+
+getHeaders(){
+  let headers = new Headers({ 'Access-Control-Allow-Origin': '*' });
+  return headers
+}
 
 }
