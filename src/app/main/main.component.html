@@ -1,2 +1,4 @@
-<button (click)="findRest()" [disabled]="!mySwitch()">Give me a random Restaurant</button>
+<label for='thumbLabel'>Radius (miles)</label>
+<md-slider (input)="onInputChange($event)"  min="0.5" max="5" step="0.5" [value]='value' [thumbLabel]='thumbLabel' #value></md-slider>
+<button  md-raised-button color='primary' (click)="findRest()" [disabled]="!mySwitch()">Give me a random Restaurant</button>
 <h1 *ngIf="restName"><a href={{url}}>{{restName}}</a></h1>

@@ -6,6 +6,9 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 
+import 'hammerjs';
+import {MdButtonModule,MdCardModule,MdSliderModule} from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,8 +17,9 @@ import { MainComponent } from './main/main.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,  
-    JsonpModule
+    HttpModule, 
+    MdButtonModule,
+    MdSliderModule, 
   ],
   providers: [],
   bootstrap: [AppComponent, ]

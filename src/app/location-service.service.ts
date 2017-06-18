@@ -19,7 +19,7 @@ public getLocation(): Observable<any> {
 		return Observable.create(observer => {
 
 			if (window.navigator && window.navigator.geolocation) {
-				window.navigator.geolocation.getCurrentPosition(
+				navigator.geolocation.getCurrentPosition(
 					(position) => {
 						observer.next(position);
             observer.complete();
@@ -27,20 +27,20 @@ public getLocation(): Observable<any> {
 					(error) => {
 						switch (error.code) {
 							case 1:
-								observer.error(GEOLOCATION_ERRORS['errors.location.permissionDenied']);
+								alert(observer.error(GEOLOCATION_ERRORS['errors.location.permissionDenied']));
 								break;
 							case 2:
-								observer.error(GEOLOCATION_ERRORS['errors.location.positionUnavailable']);
+								alert(observer.error(GEOLOCATION_ERRORS['errors.location.positionUnavailable']));
 								break;
 							case 3:
-								observer.error(GEOLOCATION_ERRORS['errors.location.timeout']);
+								alert(observer.error(GEOLOCATION_ERRORS['errors.location.timeout']));
 								break;
 						}
 					},
 					);
 			}
 			else {
-				observer.error(GEOLOCATION_ERRORS['errors.location.unsupportedBrowser']);
+				alert(observer.error(GEOLOCATION_ERRORS['errors.location.unsupportedBrowser']));
 			}
 
 		});

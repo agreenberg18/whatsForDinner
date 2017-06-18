@@ -2,11 +2,13 @@ import { Component, OnInit,Input } from '@angular/core';
 import { LocationServiceService } from '../location-service.service';
 import { YelpSearchService } from '../yelp-search.service';
 
+import {MdButtonModule,MdCardModule,MdSliderModule} from '@angular/material';
+
 @Component({
   selector: 'app-main',
   providers: [LocationServiceService, YelpSearchService],
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit {
   latNum : number;
@@ -16,15 +18,22 @@ export class MainComponent implements OnInit {
   loc: string;
   restName: string;
   url: string;
+  @Input() thumbLabel: boolean;
+  value: number;
   constructor(private locService : LocationServiceService, private yelpService : YelpSearchService) { }
 
   ngOnInit() {
     this.locService.getLocation().subscribe((pos: Position) => {
+        this.thumbLabel = true;
         this.latNum = pos.coords.latitude;
-        this.longNum = pos.coords.longitude; }
-
-    )
+        this.longNum = pos.coords.longitude; 
+      })
   this.mySwitch();
+}
+
+onInputChange($event){
+  this.value = $event.value;
+  console.log(this.value);
 }
 
     findRest(){
