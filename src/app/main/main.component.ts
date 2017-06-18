@@ -20,6 +20,7 @@ export class MainComponent implements OnInit {
   url: string;
   @Input() thumbLabel: boolean;
   value: number;
+  valStr: string;
   constructor(private locService : LocationServiceService, private yelpService : YelpSearchService) { }
 
   ngOnInit() {
@@ -27,19 +28,22 @@ export class MainComponent implements OnInit {
         this.thumbLabel = true;
         this.latNum = pos.coords.latitude;
         this.longNum = pos.coords.longitude; 
+        this.value=0.5;
       })
   this.mySwitch();
 }
 
 onInputChange($event){
   this.value = $event.value;
+  this.value = Math.floor(this.value * 1609);
   console.log(this.value);
 }
 
     findRest(){
+      this.valStr = this.value.toString();
       this.lat = this.latNum.toString();
       this.long = this.longNum.toString();
-      this.loc = 'latitude' + '=' + this.lat + '&' + 'longitude' + '=' + this.long;
+      this.loc = 'latitude' + '=' + this.lat + '&' + 'longitude' + '=' + this.long + '&radius='+ this.valStr;
       console.log(this.loc);
       
       this.yelpService.getRestaurant(this.loc).subscribe(
