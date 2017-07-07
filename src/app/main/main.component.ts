@@ -28,7 +28,7 @@ export class MainComponent implements OnInit {
         this.thumbLabel = true;
         this.latNum = pos.coords.latitude;
         this.longNum = pos.coords.longitude; 
-        this.value=0.5;
+        this.value=804; //initialize to 804m (0.5 miles)
       })
   this.mySwitch();
 }
